@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm} from '@inertiajs/vue3';
 import Table from "@/Components/Table.vue";
 import TableRow from "@/Components/TableRow.vue";
 import TableHeaderCell from "@/Components/TableHeaderCell.vue";
@@ -9,26 +9,27 @@ import TableDataCell from "@/Components/TableDataCell.vue";
 import Modal from '@/Components/Modal.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import { usePermission } from "@/composables/permissions";
 
-defineProps(['posts']);
-const form = useForm({})
+defineProps(["posts"]);
+const form = useForm({});
 
-const showConfirmDeletePostModal = ref(false)
+const showConfirmDeletePostModal = ref(false);
+const { hasPermission } = usePermission();
 
 const confirmDeletePost = () => {
     showConfirmDeletePostModal.value = true;
-}
+};
 
 const closeModal = () => {
     showConfirmDeletePostModal.value = false;
-}
+};
 
 const deletePost = (id) => {
-    form.delete(route('posts.destroy', id), {
-        onSuccess: () => closeModal()
+    form.delete(route("posts.destroy", id), {
+        onSuccess: () => closeModal(),
     });
-
-}
+};
 </script>
 
 <template>
@@ -38,7 +39,13 @@ const deletePost = (id) => {
         <div class="max-w-7xl mx-auto py-4">
             <div class="flex justify-between">
                 <h1>Posts Index Page</h1>
-                <Link :href="route('posts.create')" class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded">New Post</Link>
+                <template v-if="hasPermission('Create post')">
+                    <Link
+                        :href="route('posts.create')"
+                        class="px-3 py-2 text-white font-semibold bg-indigo-500 hover:bg-indigo-700 rounded"
+                        >New Post</Link
+                    >
+                </template>
             </div>
             <div class="mt-6">
                 <Table>
@@ -50,18 +57,48 @@ const deletePost = (id) => {
                         </TableRow>
                     </template>
                     <template #default>
-                        <TableRow v-for="post in posts" :key="post.id" class="border-b">
+                        <TableRow
+                            v-for="post in posts"
+                            :key="post.id"
+                            class="border-b"
+                        >
                             <TableDataCell>{{ post.id }}</TableDataCell>
                             <TableDataCell>{{ post.title }}</TableDataCell>
                             <TableDataCell class="space-x-4">
-                                <Link :href="route('posts.edit', post.id)"  class="text-green-400 hover:text-green-600">Edit</Link>
-                                <button @click="confirmDeletePost" class="text-red-400 hover:text-red-600">Delete</button>
-                                <Modal :show="showConfirmDeletePostModal" @close="closeModal">
+                                <template v-if="hasPermission('Edit post')">
+                                    <Link
+                                        :href="route('posts.edit', post.id)"
+                                        class="text-green-400 hover:text-green-600"
+                                        >Edit</Link
+                                    >
+                                </template>
+                                <template v-if="hasPermission('Delete post')">
+                                    <button
+                                        @click="confirmDeletePost"
+                                        class="text-red-400 hover:text-red-600"
+                                    >
+                                        Delete
+                                    </button>
+                                </template>
+
+                                <Modal
+                                    :show="showConfirmDeletePostModal"
+                                    @close="closeModal"
+                                >
                                     <div class="p-6">
-                                        <h2 class="text-lg font-semibold text-slate-800"> Are you sure to delete this user?</h2>
+                                        <h2
+                                            class="text-lg font-semibold text-slate-800"
+                                        >
+                                            Are you sure to delete this Role?
+                                        </h2>
                                         <div class="mt-6 flex space-x-4">
-                                            <DangerButton @click="deletePost(post.id)">Delete</DangerButton>
-                                            <SecondaryButton @click="closeModal">Cancel</SecondaryButton>
+                                            <DangerButton
+                                                @click="deletePost(post.id)"
+                                                >Delete</DangerButton
+                                            >
+                                            <SecondaryButton @click="closeModal"
+                                                >Cancel</SecondaryButton
+                                            >
                                         </div>
                                     </div>
                                 </Modal>

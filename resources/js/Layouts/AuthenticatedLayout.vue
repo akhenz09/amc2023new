@@ -11,7 +11,8 @@ import DarkModeSwitch from '@/Components/DarkModeSwitch.vue';
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark()
-const toggleDarkMode = useToggle(isDark)
+const toggleDarkMode = useToggle(isDark);
+const { hasPermission } = usePermission();
 
 const showingNavigationDropdown = ref(false);
 const { hasRole } = usePermission();
@@ -47,7 +48,7 @@ const { hasRole } = usePermission();
                                       Admin
                                 </NavLink>
                                 <NavLink
-                                v-if="hasRole('admin')"
+                                v-if="hasPermission('Landing Page Content')"
                                 :href="route('heroes.index')"
                                 :active="route().current('heroes.index')">
                                       Landing Page

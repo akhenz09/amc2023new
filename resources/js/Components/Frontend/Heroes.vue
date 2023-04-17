@@ -18,10 +18,9 @@ const props = defineProps({
           </h1>
           <p
             class="pt-4 pb-8 md:pt-6 md:pb-12 max-w-[380px] text-lg text-center lg:text-left ">{{ hero.name }}</p>
-          <button
-            class="btn btn-md bg-accent text-light-tail-100 md:btn-lg transition-all">
-            Work with me
-          </button>
+          <a href="http://127.0.0.1:8000/#contact"
+            class="btn btn-md bg-accent text-light-tail-100 md:btn-lg transition-all">Contact Us
+        </a>
           <div class="pt-12">
             <h5
               class="
@@ -54,7 +53,7 @@ const props = defineProps({
                   mr-3
                   sm:mr-4
                 "
-                href="https://facebook.com/laraveller"
+                href="https://www.facebook.com/plereap/"
               >
                 <svg
                   width="8"
@@ -83,7 +82,7 @@ const props = defineProps({
                   mr-3
                   sm:mr-4
                 "
-                href="https://facebook.com/laraveller"
+                href="https://www.facebook.com/plereap/"
               >
                 <svg
                   width="16"
@@ -112,7 +111,7 @@ const props = defineProps({
                   mr-3
                   sm:mr-4
                 "
-                href="https://facebook.com/laraveller"
+                href="https://www.facebook.com/plereap/"
               >
                 <svg
                   width="16"
@@ -141,7 +140,7 @@ const props = defineProps({
                   mr-3
                   sm:mr-4
                 "
-                href="https://facebook.com/laraveller"
+                href="https://www.facebook.com/plereap/"
               >
                 <svg
                   width="14"
@@ -159,7 +158,7 @@ const props = defineProps({
         </div>
         <div
           class="flex flex-1 justify-end items-center mt-8 md:mt-0">
-          <img :src="hero.image" :alt="heroes.name" class="object-cover h-[350px] w-[830px] md:mx-auto lg:mx-0 rounded-2xl " />
+          <img :src="hero.image" :alt="heroes.name" class="object-cover h-full w-[830px] md:mx-auto lg:mx-0 rounded-2xl " />
         </div>
       </div>
     </div>
