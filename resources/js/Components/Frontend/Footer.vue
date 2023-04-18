@@ -14,14 +14,14 @@
         "
       >
         <div class="flex space-x-6 items-center justify-center">
-          <img
-            class="h-8 w-auto"
-            src="https://flowbite.com/docs/images/logo.svg"
+          <!--<img
+            class="h-20 w-auto"
+            src="img/AMCLOGO.png"
             alt="Laraveller.com"
-          />
+          />-->
         </div>
         <p class="text-paragraph opacity-80 text-[15px]">
-          &copy; 2022 Laraveller.com All right reserved.
+          &copy; 2022 PLE-REAP All right reserved.
         </p>
       </div>
     </div>

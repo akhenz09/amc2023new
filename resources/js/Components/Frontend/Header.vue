@@ -35,7 +35,7 @@ onMounted(() => {
 <nav class="w-full fixed z-20 px-2 sm:px-4 py-2.5 rounded" :class="{'bg-light-primary dark:bg-dark-primary': scrollBg, ' dark:bg-slate-800': !scrollBg,}">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
     <a href="http://127.0.0.1:8000/#home" class="flex items-center">
-        <img src="img/amc black.png" alt="amc logo" class="h-[100px] -my-3.5 px-2">
+        <img src="img/AMCLOGO.png" alt="amc logo" class="h-[100px] -my-3.5 px-2">
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">AMC PODCLASS</span>
     </a>
     <button @click="showMobileMenu = !showMobileMenu" data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">

@@ -8,7 +8,16 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import SidebarLink from "@/Components/SidebarLink.vue"
 
-const showingNavigationDropdown = ref(false);
+const showMobileMenu = ref("true");
+
+const navigations = [
+    { name: "Dashboard", href: "http://127.0.0.1:8000/dashboard" },
+  { name: "User", href: "http://127.0.0.1:8000/users" },
+  { name: "Roles", href: "http://127.0.0.1:8000/roles" },
+  { name: "Permission", href: "http://127.0.0.1:8000/permissions" },
+  { name: "Posts", href: "http://127.0.0.1:8000/posts" },
+];
+
 </script>
 
 <template>
@@ -18,11 +27,9 @@ const showingNavigationDropdown = ref(false);
     <div class="w-full h-full">
         <div class="-mx-6 px-6 py-4  flex justify-center">
             <a href="#" title="home">
-                <img src="/img/amc black.png" class="w-32" alt="amc logo">
+                <img src="/img/AMCLOGO.png" class="w-32" alt="amc logo">
             </a>
         </div>
-
-
         <ul class="space-y-2 tracking-wide mt-8">
             <li>
                 <SidebarLink href="/dashboard"
@@ -86,21 +93,47 @@ const showingNavigationDropdown = ref(false);
         <Link :href="route('logout')" method="post" as="button" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group hover:text-red-400">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+
             </svg>
             <span class="group-hover:text-red-400">Logout</span>
         </Link>
     </div>
 </aside>
+
 <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
     <div class="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
-        <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
             <h5 hidden class="text-2xl text-gray-600 font-medium lg:block">Admin Page Dashboard</h5>
-            <button class="w-12 h-16 -mr-2 border-r lg:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-            <div class="flex space-x-4">
+            <button @click="showMobileMenu = !showMobileMenu" data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+    </button>
+    <div
+    :class="{ hidden : showMobileMenu }"
+    id="navbar-default">
+      <ul class="
+            flex flex-col
+            p-4
+            mt-4
+            rounded-lg
+            border self-center text-xl font-semibold whitespace-nowrap
+            md:flex-row md:space-x-8 md:mt-0 md:font-medium md:border-0
+          ">
+          <li v-for="(navigation, index) in navigations" :key="index">
+            <a
+              :href="navigation.href"
+              class="block py-2 pr-4 pl-3 text-black rounded hover:text-light-tail-100 dark:text-white dark:hover:text-light-tail-100" aria-current="page">{{ navigation.name }}</a
+            >
+          </li>
+
+          <li class=" block py-2 pr-4 pl-3 self-center text-xl font-semibold whitespace-nowrap dark:text-white  mt-[-5px]">
+
+
+
+        </li>
+
+    </ul>
+
+    <div class="flex space-x-4">
                 <!--search bar -->
                 <div hidden class="md:block">
                     <div class="relative flex items-center text-gray-400 focus-within:text-cyan-400">
@@ -129,12 +162,15 @@ const showingNavigationDropdown = ref(false);
                     </svg>
                 </button>
             </div>
-        </div>
     </div>
+
+        </div>
+
 
     <div class="px-6 pt-6 2xl:container">
         <slot />
     </div>
 </div>
     </div>
+
 </template>
